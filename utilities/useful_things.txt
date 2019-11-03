@@ -13,3 +13,7 @@
 	https://github.com/jiaaro/pydub
 	https://github.com/jiaaro/pydub/blob/master/API.markdown
 	https://stackoverflow.com/a/43950755
+
+# bytes to int
+	https://stackoverflow.com/questions/34009653/convert-bytes-to-int
+	https://www.delftstack.com/howto/python/how-to-convert-bytes-to-integers/

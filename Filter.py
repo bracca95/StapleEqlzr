@@ -13,7 +13,7 @@ class Filter:
 
     # build a low-pass filter
     def lowPass(self, cut):
-        return cut * np.sinc(cut * self.__n)
+        return cut/22100 * np.sinc(cut/22100 * self.__n)
 
     # build a band-pass filter
     def bandPass(self, midcut):
@@ -23,4 +23,4 @@ class Filter:
             return
         else:
             low, up = self.__bande.getLowerAndUpper(midcut)
-            return up * np.sinc(up * self.__n) - low * np.sinc(low * self.__n)
+            return up/22100 * np.sinc(up/22100 * self.__n) - low/22100 * np.sinc(low/22100 * self.__n)
