@@ -1,18 +1,25 @@
 from pydub import AudioSegment
 from pydub.playback import play
 import io
+import os
 
 class Player:
 
     # parametrized constructor
-    def __init__(self, path, formato):
-        self.__path = path
-        self.__formato = formato
+    def __init__(self, songPath):
+        self.__songPath = songPath
 
-    # methods
+    ## methods ##
+    # this returns raw data
     def loadSong(self):
-        return open(self.__path, 'rb').read()
-    
+        if self.__songPath == None:
+            print('empty file or wrong path')
+            return
+        else:
+            return open(self.__songPath, 'rb').read()
+
+    # this plays the song
     def playSong(self, rawData):
-        song = AudioSegment.from_file(io.BytesIO(rawData), format=self.__formato)
+        filename, file_extension = os.path.splitext(self.__songPath)
+        song = AudioSegment.from_file(io.BytesIO(rawData), format=file_extension.strip('.'))
         play(song)
