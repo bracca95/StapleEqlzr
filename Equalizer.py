@@ -2,10 +2,12 @@ from Filter import *
 
 class Equalizer:
 
+    # constructor
     def __init__(self):
-        self.__band = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
+        self.__band = Filter().getMidBands()
         self.__filters = [Filter() for _ in range(len(self.__band))]
 
+    # set filters parameters
     def setFilters(self):
         i = 0
         while i < len(self.__band):
@@ -19,5 +21,6 @@ class Equalizer:
                 self.__filters[i] = a.getFilt()
             i = i+1
 
+    # get filter list
     def getFilters(self):
         return self.__filters

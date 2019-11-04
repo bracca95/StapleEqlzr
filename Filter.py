@@ -27,6 +27,10 @@ class Filter:
             low, up = self.__bande.getLowerAndUpper(midcut)
             self.__filtVal = up/22100 * np.sinc(up/22100 * self.__n) - low/22100 * np.sinc(low/22100 * self.__n)
 
+    def getMidBands(self):
+        return self.__bande.getMidList()
+
+    # get a whole Filter class itself
     def getFilt(self):
         return self
 

@@ -25,6 +25,9 @@ class Band:
             # update index
             i = i+1
 
+    def getMidList(self):
+        return self.__band
+
     def getUpperList(self):
         return self.__upper
 
@@ -43,13 +46,3 @@ class Band:
                 
         print('unknown value. choose between [64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]')
         return
-
-
-
-
-# debug
-# ciao = Band()
-# ciao.upperList()
-
-# print(ciao.lower)
-# print(ciao.upper)

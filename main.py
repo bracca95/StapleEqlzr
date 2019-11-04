@@ -1,7 +1,7 @@
 
 from Player import *
-from Filter import *
 from Equalizer import *
+from Gain import Gain
 from scipy import signal
 
 if __name__=='__main__':
@@ -15,10 +15,13 @@ if __name__=='__main__':
     eq.setFilters()
     filterList = eq.getFilters()
 
+    g = Gain()
+    g.setGain(1)
+
     data = 0
     i = 0
     while i < len(filterList):
-        data = data + np.convolve(filterList[i].getFiltVal(), numeric_array)
+        data = data + np.multiply(g.getGain(i), np.convolve(filterList[i].getFiltVal(), numeric_array))
         i = i+1
     
     # save song
