@@ -10,10 +10,12 @@ class Filter:
         self.__M = 500
         self.__n = np.linspace(-(self.__M)/2, (self.__M)/2, self.__M)
         self.__bande = Band()
+        self.__filtVal = []
 
     # build a low-pass filter
     def lowPass(self, cut):
-        return cut/22100 * np.sinc(cut/22100 * self.__n)
+        # frequencies must be normalized: cut/(Fs/2)
+        self.__filtVal = cut/22100 * np.sinc(cut/22100 * self.__n)
 
     # build a band-pass filter
     def bandPass(self, midcut):
@@ -23,4 +25,11 @@ class Filter:
             return
         else:
             low, up = self.__bande.getLowerAndUpper(midcut)
-            return up/22100 * np.sinc(up/22100 * self.__n) - low/22100 * np.sinc(low/22100 * self.__n)
+            self.__filtVal = up/22100 * np.sinc(up/22100 * self.__n) - low/22100 * np.sinc(low/22100 * self.__n)
+
+    def getFilt(self):
+        return self
+
+    # return filter value
+    def getFiltVal(self):
+        return self.__filtVal

@@ -1,39 +1,30 @@
 
 from Player import *
 from Filter import *
+from Equalizer import *
 from scipy import signal
 
-import array
-from pydub import AudioSegment
-from pydub.utils import get_array_type
-from pydub.playback import play
-from scipy.io.wavfile import write
-
 if __name__=='__main__':
+
+    # load song as numeric array
     path = 'media/american.mp3'
-    
     player = Player(path)
+    numeric_array = player.loadSong()
 
-    sound = AudioSegment.from_file(file=path)
-    left = sound.split_to_mono()[0]
+    eq = Equalizer()
+    eq.setFilters()
+    filterList = eq.getFilters()
 
-    bit_depth = left.sample_width * 8
-    array_type = get_array_type(bit_depth)
-
-    numeric_array = array.array(array_type, left._data)
-    #print(numeric_array)
-
-    # load song
-    data = player.loadSong()
-
-    # load filters
-    filt1 = Filter()
-    a = filt1.bandPass(64)
-
-    # filter the song
-    data2 = np.convolve(a, numeric_array)
-    scaled = np.int16(data2/np.max(np.abs(data2)) * 32767)
+    data = 0
+    i = 0
+    while i < len(filterList):
+        data = data + np.convolve(filterList[i].getFiltVal(), numeric_array)
+        i = i+1
+    
+    # save song
+    # https://stackoverflow.com/questions/10357992/how-to-generate-audio-from-a-numpy-array
+    scaled = np.int16(data/np.max(np.abs(data)) * 32767)
     write('test.mp3', 44100, scaled)
     
     # play song (I could merge everything in one function but I do not always want to play)
-    #player.playSong(data)
+    # player.playSong(data2)

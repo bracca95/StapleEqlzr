@@ -13,7 +13,7 @@ class Band:
         i = 0
 
         # read all the cut frequencies
-        while i < len(self.__band) - 1 :
+        while i < len(self.__band) - 1:
             # get the upperbound
             up = 2 * self.__band[i+1] - self.__lower[i]
             self.__upper.append(up)
@@ -35,7 +35,7 @@ class Band:
     def getLowerAndUpper(self, val):
         i = 0
         
-        while i < len(self.__band) - 1 :
+        while i < len(self.__band):
             if val != self.__band[i]:
                 i = i+1
             else:
