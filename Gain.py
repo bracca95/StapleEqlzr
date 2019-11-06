@@ -1,4 +1,5 @@
 import numpy as np
+from Preset import Preset
 
 class Gain:
 
@@ -7,19 +8,16 @@ class Gain:
         self.__gainVals = np.tile(0.0, 10)
         self.__min = -20
         self.__max = 20
-        # self.__pop = [-1.6, 4,8, 7.2, 8, 5.6, 0, -2.1, -2.1, -1.6, -1.6]
-        # self.__rock = [8, 4.8, -5.6, -8, -3.2, 4, 8.8, 11.2, 11.2, 11.2]
+        self.__preset = Preset()
 
     # set gain for each preset and normalize it
     def setGain(self, num):
-        if num == 0:
-            __temp = [-1.6, 4.8, 7.2, 8, 5.6, 0, -2.1, -2.1, -1.6, -1.6] # self.__pop
-        if num == 1:
-            __temp = [8, 4.8, -5.6, -8, -3.2, 4, 8.8, 11.2, 11.2, 11.2]
+        self.__preset.readPreset(num)
+        self.__gainVals = self.__preset.getPreset()
 
         i=0
         while i < len(self.__gainVals):
-            self.__gainVals[i] = __temp[i]
+            # normalization
             self.__gainVals[i] = 2*((self.__gainVals[i] - self.__min)/(self.__max - self.__min)) -1
             i = i+1
 

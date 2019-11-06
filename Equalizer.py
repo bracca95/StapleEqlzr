@@ -14,11 +14,11 @@ class Equalizer:
             if i < 1:
                 a = Filter()
                 a.lowPass(32)
-                self.__filters[i] = a.getFilt()
             else:
                 a = Filter()
                 a.bandPass(self.__band[i])
-                self.__filters[i] = a.getFilt()
+            
+            self.__filters[i] = a.getFilt()
             i = i+1
 
     # get filter list
