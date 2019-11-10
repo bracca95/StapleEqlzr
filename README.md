@@ -1,5 +1,12 @@
 # Description
-Simple implementation of a 10-band graphic equalizer with FIR filters by truncation.
+Simple implementation of a 10-band graphic equalizer with FIR filters by truncation. The program currently takes as input a sample song in `media/` and returns the equalized song in the main project directory, which can be played with any media player.
+In order to choose the preset: go to the `main.py` and change a numeric value (int). To see and edit preset, use the `utilities/presetes.txt` file
+
+There are still things to do:
+- save both audio channels
+- draw a GUI
+- play "on the fly"
+- custom presets
 
 # References
 1 integrated GUI

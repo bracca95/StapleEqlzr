@@ -12,7 +12,7 @@ class Preset:
             line = fp.readline()
             i = 1
             while line:
-                line = line.strip('qwertyuiopasdfghjklzxcvbnm:')
+                line = line.strip('qwertyuiopasdfghjklzxcvbnm_:')
                 arr = line.split('   ')
                 
                 idx = 0
