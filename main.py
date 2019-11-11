@@ -17,7 +17,8 @@ if __name__=='__main__':
 
     # change iteger value to select different presets (0:pop, 1:rock)
     g = Gain()
-    g.setGain(13)
+    g.loadGain()
+    g.setGain(16)
 
     data = 0
     i = 0
