@@ -16,7 +16,7 @@ class Gain:
         with open('utilities/presets.json') as json_file:
 	        data = json.load(json_file)							            # in = .json, out = dict
 	        json_string = json.dumps(data)						            # in = dict, out = string
-	        self.__preset = preset_from_dict(json.loads(json_string))	# in = string, out = Preset
+	        self.__preset = preset_from_dict(json.loads(json_string))	    # in = string, out = Preset
     
     # set gain for each preset and __normalize it__
     def setGain(self, index):
