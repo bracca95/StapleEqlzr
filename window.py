@@ -1,13 +1,13 @@
 import tkinter as tk
-import tkinter.ttk as ttk
+from switcher import Switcher
 from gain import Gain
+from band_labels import Band
 
 ## CONSTANTS
 DARK_COLOR = '#2D2D2D'
 NUM_SLIDER = 10
-#WIN_WIDTH = 600
-#WIN_HEIGHT = 300
-#SCREEN_RES = str(WIN_WIDTH)+'x'+str(WIN_HEIGHT)
+ROWS = 5
+COLUMNS = 11
 
 class Window(tk.Tk):
 
@@ -15,25 +15,34 @@ class Window(tk.Tk):
 		tk.Tk.__init__(self)
 
 		# aspect and configuration
-		#self.geometry(SCREEN_RES)					# aspect ratio
 		self.title('Staple Eqlz')					# window title
 		self.resizable(False, False)				# lock width, height
 		self.configure(background=DARK_COLOR)		# background colour
 
-		# divide space in frames
-		# num slider + space for labels
-		for i in range(NUM_SLIDER+1):
-			self.frame = tk.Frame(self,
-								  background='yellow',
-								  relief=tk.GROOVE,
-								  borderwidth=5)
+		for row in range(ROWS):
+			for col in range(COLUMNS):
+				self.frame = tk.Frame(self).grid(row=row, column=col)
 
-			# show
-			if i < 1:
-				self.frame.grid(row=0, column=i)
-				self.labp12 = tk.Label(self.frame, text='+12 dB').grid(row=0, column=i, pady=50)
-				self.labnul = tk.Label(self.frame, text='0 dB').grid(row=1, column=i, pady=50)
-				self.labm12 = tk.Label(self.frame, text='-12 dB').grid(row=2, column=i, pady=50)
-			else:
-				self.frame.grid(row=0, column=i, pady=50)
-				self.gain = Gain(self.frame, str(i))
+				if row == 0 and col == 1:
+					self.active = Switcher(self.frame, row, col)
+
+				if row == 1 and col == 0:
+					self.labp12 = tk.Label(self.frame, text='+12 dB',
+											fg='white', bg=DARK_COLOR)
+					self.labp12.grid(row=row, column=col, padx=7)
+
+				if row == 2 and col == 0:
+					self.labnul = tk.Label(self.frame, text='0 dB',
+											fg='white', bg=DARK_COLOR)
+					self.labnul.grid(row=row, column=col, padx=7, pady=67)
+
+				if row == 3 and col == 0:
+					self.labm12 = tk.Label(self.frame, text='-12 dB',
+											fg='white', bg=DARK_COLOR)
+					self.labm12.grid(row=row, column=col, padx=7)
+
+				if row == 1 and col > 0:
+					self.gain = Gain(self.frame, row, col)
+
+				if row == 4 and col > 0:
+					self.band_lab = Band(self.frame, row, col, str(col))

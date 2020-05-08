@@ -1,12 +1,9 @@
 import tkinter as tk
 
-class Gain:
-	def __init__(self, root, gainKey):
+DARK_COLOR = '#2D2D2D'
 
-		self.gains = {
-		'1': '32', '2': '64', '3': '125', '4': '250', '5': '500', '6': '1k',
-		'7': '2k', '8': '4k', '9': '8k', '10': '16k'
-		}
+class Gain:
+	def __init__(self, root, r, c):
 
 		self.scale = tk.Scale(master=root, 
 					  		  orient=tk.VERTICAL,
@@ -14,10 +11,8 @@ class Gain:
 					  		  showvalue=0,
 					  		  length=200, 
 					  		  from_=12.0, 
-					  		  to=-12.0)
-
-		self.label = tk.Label(master=root, text=self.gains[gainKey])
+					  		  to=-12.0,
+					  		  highlightcolor=DARK_COLOR)
 
 		# show up
-		self.scale.grid(row=0, column=0, padx=10)
-		self.label.grid(row=2, column=0, pady=10)
+		self.scale.grid(row=r, column=c, padx=10, rowspan=3)
